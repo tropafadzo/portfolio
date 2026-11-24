@@ -1,0 +1,1516 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadiwanashe R Mafaniso | Cloud & IoT Engineer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans, Inter, and JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        obsidian: '#0B0F19',
+                        slateDark: '#111827',
+                        cyanAccent: '#06B6D4',
+                        emeraldAccent: '#10B981',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Glassmorphism & Subtle Scrollbar */
+        body {
+            background-color: #0B0F19;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(17, 24, 39, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #06B6D4 0%, #10B981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glow-dot {
+            box-shadow: 0 0 12px #10B981;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06B6D4;
+        }
+
+        /* Modal Transitions */
+        .modal-backdrop {
+            transition: opacity 0.25s ease;
+        }
+        .modal-panel {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Brand / Logo -->
+                <a href="#about" class="flex items-center gap-2.5 group">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-obsidian font-display font-extrabold text-lg shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                        TM
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-display font-bold text-slate-100 tracking-tight text-sm sm:text-base leading-none">Tadiwa<span class="text-cyan-400">.dev</span></span>
+                        <span class="font-mono text-[10px] text-slate-400 tracking-wider uppercase mt-0.5">Harare, ZW</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#about" class="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#projects" class="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#experience" class="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Experience</a>
+                    <a href="#learning" class="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Learning</a>
+                    <a href="#skills" class="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#contact" class="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- CTA & Mobile Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 to-emerald-500 text-obsidian hover:opacity-95 transition-all shadow-lg shadow-cyan-500/20">
+                        <span>Let's Connect</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden p-2 rounded-lg text-slate-300 hover:bg-slate-800/70 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0B0F19]/95 border-b border-slate-800/80 px-4 pt-2 pb-5 space-y-2">
+            <a href="#about" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400">About</a>
+            <a href="#projects" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400">Projects</a>
+            <a href="#experience" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400">Experience</a>
+            <a href="#learning" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400">Learning</a>
+            <a href="#skills" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400">Skills</a>
+            <a href="#contact" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400">Contact</a>
+            <div class="pt-2">
+                <a href="#contact" class="mobile-link w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500 to-emerald-500 text-obsidian">
+                    <span>Download Resume / Connect</span>
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. HERO & ABOUT SECTION -->
+    <section id="about" class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+        <!-- Interactive Node Network Canvas -->
+        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-45"></canvas>
+        
+        <!-- Ambient Radial Glows -->
+        <div class="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+                <!-- Left Column: Headline, About Details, Focus Pills, CTAs & Bio -->
+                <div class="lg:col-span-7 order-1">
+                    <!-- Status / Location Pill -->
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/70 mb-5 backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 glow-dot animate-pulse"></span>
+                        <span class="font-mono text-xs text-slate-300">Open to internships, graduate opportunities and junior technical roles</span>
+                    </div>
+
+                    <!-- Main Name & Primary Headline -->
+                    <h1 class="font-display font-extrabold text-3xl sm:text-4xl xl:text-5xl tracking-tight text-white leading-[1.12] mb-3">
+                        Tadiwanashe  Mafaniso <span class="text-slate-400 font-semibold text-2xl sm:text-3xl font-mono"></span>
+                    </h1>
+                    <h2 class="font-display font-bold text-xl sm:text-2xl xl:text-3xl gradient-text leading-snug mb-3">
+                        
+                    </h2>
+
+                    <!-- Role Subtitle -->
+                    <p class="font-mono text-xs sm:text-sm text-cyan-400 font-medium tracking-wide mb-4">
+                        Cloud Computing &amp; IoT | Software Development | IT Support
+                    </p>
+
+                    <!-- Summary Line -->
+                    <p class="text-base sm:text-lg text-slate-200 font-medium leading-relaxed mb-4">
+                        Final-year student at the University of Zimbabwe, with practical experience in IT support, systems administration, web application development, networking and IoT solutions.
+                    </p>
+
+                    <!-- Focus Pills -->
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="font-mono text-xs px-3 py-1.5 rounded-lg bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">IT Support</span>
+                        <span class="font-mono text-xs px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Cloud Computing</span>
+                        <span class="font-mono text-xs px-3 py-1.5 rounded-lg bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">Software Development</span>
+                        <span class="font-mono text-xs px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">IoT Engineering</span>
+                    </div>
+
+                    <!-- Detailed Bio Paragraph -->
+                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-7">
+                        Grounded in a BSc Honours in Cloud Computing &amp; Internet of Things from the University of Zimbabwe, I focus on building practical software solutions, cloud-based systems and IoT applications that address real-world challenges. My interests span full-stack development, systems integration, IT infrastructure and intelligent connected technologies, with an emphasis on creating reliable, scalable and user-focused solutions.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap items-center gap-3.5">
+                        <a href="#projects" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-emerald-500 text-obsidian hover:brightness-110 transition-all shadow-lg shadow-cyan-500/25">
+                            <span>View Projects</span>
+                            <i data-lucide="layers" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#contact" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm bg-slate-900/80 text-slate-100 border border-slate-700 hover:border-cyan-400/60 hover:bg-slate-800/80 transition-all">
+                            <span>Get in Touch</span>
+                            <i data-lucide="send" class="w-4 h-4 text-cyan-400"></i>
+                        </a>
+                        <button onclick="triggerResumeDownload()" class="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl font-mono text-xs text-slate-300 hover:text-emerald-400 border border-transparent hover:border-slate-800 transition-all">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                            <span>Request CV</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Portrait Display Frame Next to Text -->
+                <div class="lg:col-span-5 flex flex-col items-center lg:items-end order-2">
+                    <div class="relative w-full max-w-[340px] sm:max-w-[380px] group">
+                        <!-- Ambient Cyan/Emerald Border Glow -->
+                        <div class="absolute -inset-1 bg-gradient-to-br from-cyan-500/40 via-emerald-500/30 to-cyan-500/40 rounded-3xl blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <!-- Main Portrait Card -->
+                        <div id="portrait-dropzone" role="button" tabindex="0" aria-label="Upload or change profile photo" class="relative glass-card rounded-3xl p-3 bg-[#0E1422]/90 border border-slate-700/80 cursor-pointer overflow-hidden transition-all duration-300 hover:border-cyan-400/60">
+                            <!-- Tech Corner Brackets -->
+                            <span class="absolute top-2.5 left-2.5 w-4 h-4 border-t-2 border-l-2 border-cyan-400 rounded-tl-md z-20 pointer-events-none"></span>
+                            <span class="absolute top-2.5 right-2.5 w-4 h-4 border-t-2 border-r-2 border-emerald-400 rounded-tr-md z-20 pointer-events-none"></span>
+                            <span class="absolute bottom-2.5 left-2.5 w-4 h-4 border-b-2 border-l-2 border-emerald-400 rounded-bl-md z-20 pointer-events-none"></span>
+                            <span class="absolute bottom-2.5 right-2.5 w-4 h-4 border-b-2 border-r-2 border-cyan-400 rounded-br-md z-20 pointer-events-none"></span>
+
+                            <!-- Aspect Ratio Container -->
+                            <div class="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-gradient-to-b from-slate-900 via-[#0B0F19] to-slate-900 flex items-center justify-center">
+                                <!-- Subtle Background Grid Pattern -->
+                                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#06B6D4 1px, transparent 1px); background-size: 18px 18px;"></div>
+
+                                <!-- Default Artistic Monogram / Silhouette Placeholder -->
+                                <div id="portrait-placeholder" class="relative z-10 flex flex-col items-center justify-center text-center p-6 select-none">
+                                    <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 border border-cyan-400/40 flex items-center justify-center mb-5 shadow-inner">
+                                        <div class="w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-[#0B0F19]/90 border border-slate-700/80 flex items-center justify-center">
+                                            <span class="font-display font-extrabold text-3xl sm:text-4xl gradient-text tracking-tight">TM</span>
+                                        </div>
+                                        <span class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-cyan-500 text-obsidian flex items-center justify-center shadow-lg">
+                                            <i data-lucide="camera" class="w-4 h-4"></i>
+                                        </span>
+                                    </div>
+                                    <p class="font-display font-bold text-base text-slate-100">Tadiwanashe  Mafaniso</p>
+                                    <p class="font-mono text-xs text-cyan-400 mt-1">Cloud Computing &amp; IoT • Software Development</p>
+                                    <p class="text-[11px] text-slate-500 mt-2 max-w-[220px]">Set PORTRAIT_IMAGE_URL in script for live photo</p>
+                                </div>
+
+                                <!-- Portrait Image Preview -->
+                                <img id="portrait-preview" src="" alt="Tadiwanashe R. Mafaniso Portrait" class="hidden relative z-10 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]" />
+
+                                <!-- Hover Overlay for Changing Photo -->
+                                <div id="portrait-hover-overlay" class="hidden absolute inset-0 z-20 bg-obsidian/65 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-col items-center justify-center text-center p-4">
+                                    <div class="w-11 h-11 rounded-full bg-cyan-500/20 border border-cyan-400/60 text-cyan-300 flex items-center justify-center mb-2">
+                                        <i data-lucide="image-plus" class="w-5 h-5"></i>
+                                    </div>
+                                    <span class="font-mono text-xs font-medium text-white">Click or Drop to Change Photo</span>
+                                </div>
+
+                                <!-- Bottom-Left Location & Builder Floating Badge -->
+                                <div class="absolute bottom-3 left-3 z-20 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-obsidian/85 backdrop-blur-md border border-slate-700/80 shadow-lg">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 glow-dot"></span>
+                                    <span class="font-mono text-[11px] text-slate-200 font-medium">Harare, ZW • Builder</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hidden File Input -->
+                        <input type="file" id="portrait-file-input" accept="image/*" class="hidden" />
+
+                        <!-- Action Controls Below Portrait Card -->
+                        <div class="flex items-center justify-between gap-2.5 mt-3.5 px-1">
+                            <button type="button" id="upload-photo-btn" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-mono text-xs font-medium bg-slate-900/90 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/15 transition-all">
+                                <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                                <span id="upload-photo-btn-label">Upload Your Photo</span>
+                            </button>
+                            <button type="button" id="reset-photo-btn" class="hidden inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl font-mono text-xs font-medium bg-slate-900/90 text-slate-400 border border-slate-800 hover:text-rose-400 hover:border-rose-500/40 transition-all" title="Remove uploaded photo">
+                                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                                <span>Reset</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. PROJECTS & CASE STUDIES SECTION -->
+    <section id="projects" class="py-20 sm:py-28 relative border-t border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div>
+                    <div class="font-mono text-xs text-cyan-400 uppercase tracking-widest mb-2">// Applied Engineering &amp; Builds</div>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Projects &amp; Case Studies</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
+                        Select any project card to view architecture highlights, technical approach and key deliverables.
+                    </p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" data-filter="all" class="filter-btn font-mono text-xs px-3.5 py-2 rounded-xl border bg-cyan-500/15 text-cyan-300 border-cyan-500/40 transition-all">All</button>
+                    <button type="button" data-filter="web" class="filter-btn font-mono text-xs px-3.5 py-2 rounded-xl border bg-slate-900/70 text-slate-400 border-slate-800 hover:text-slate-200 transition-all">Web &amp; Marketplaces</button>
+                    <button type="button" data-filter="cloud" class="filter-btn font-mono text-xs px-3.5 py-2 rounded-xl border bg-slate-900/70 text-slate-400 border-slate-800 hover:text-slate-200 transition-all">Cloud &amp; Distributed Systems</button>
+                    <button type="button" data-filter="iot" class="filter-btn font-mono text-xs px-3.5 py-2 rounded-xl border bg-slate-900/70 text-slate-400 border-slate-800 hover:text-slate-200 transition-all">IoT &amp; Embedded</button>
+                    <button type="button" data-filter="ai" class="filter-btn font-mono text-xs px-3.5 py-2 rounded-xl border bg-slate-900/70 text-slate-400 border-slate-800 hover:text-slate-200 transition-all">AI &amp; Support</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- 3. EXPERIENCE & TIMELINE SECTION -->
+    <section id="experience" class="py-20 sm:py-28 relative border-t border-slate-800/60 bg-slate-950/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <div class="font-mono text-xs text-emerald-400 uppercase tracking-widest mb-2">// Hands-On Practice &amp; Operations</div>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Experience &amp; Timeline</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
+                    Practical systems administration, enterprise IT operations, software quality assurance and academic cloud &amp; IoT foundations.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- GTel Zimbabwe -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 border-l-4 border-l-cyan-400">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                        <div>
+                            <h3 class="font-display font-bold text-xl text-white">GTel Zimbabwe</h3>
+                            <p class="font-mono text-sm text-cyan-400">IT Support / Systems Administration Intern</p>
+                        </div>
+                        <span class="font-mono text-xs px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 self-start sm:self-auto">
+                            Completed · July 2026
+                        </span>
+                    </div>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-sm text-slate-300 mt-4">
+                        <li class="flex items-start gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i><span>Supported day-to-day IT operations and end-user technical issues.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i><span>Assisted with Windows Server environments and Active Directory.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i><span>Worked with Group Policy and user account management.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i><span>Troubleshot hardware, software and operating system problems.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i><span>Assisted with network connectivity, routers, switches and DHCP.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i><span>Supported business applications and remote desktop environments.</span></li>
+                        <li class="flex items-start gap-2.5 md:col-span-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i><span>Used tools including AnyDesk, Bitrix24 and Microsoft Dynamics-related systems.</span></li>
+                    </ul>
+                </div>
+
+                <!-- Freelance Mobile Application Testing -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 border-l-4 border-l-emerald-400">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                        <div>
+                            <h3 class="font-display font-bold text-xl text-white">Freelance Mobile Application Testing</h3>
+                            <p class="font-mono text-sm text-emerald-400">Manual Software Tester</p>
+                        </div>
+                        <span class="font-mono text-xs px-3 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700 self-start sm:self-auto">
+                            Quality Assurance
+                        </span>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-300 mt-4">
+                        <li class="flex items-start gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i><span>Tested mobile application functionality.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i><span>Identified and documented software bugs.</span></li>
+                        <li class="flex items-start gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i><span>Submitted feedback to improve application usability and reliability.</span></li>
+                    </ul>
+                </div>
+
+                <!-- Academic Foundation -->
+                <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-800/80">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">University of Zimbabwe</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Final-Year BSc Honours in Cloud Computing &amp; Internet of Things</p>
+                        </div>
+                        <span class="font-mono text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 self-start sm:self-auto">
+                            Academic Milestone
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3B. ACTIVE GROWTH & LEARNING SECTION -->
+    <section id="learning" class="py-20 sm:py-24 relative border-t border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <div class="font-mono text-xs text-emerald-400 uppercase tracking-widest mb-2">// Continuous Skill Progression</div>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Active Growth &amp; Learning</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
+                    Actively expanding hands-on proficiency across cloud architecture, container orchestration, Linux administration and structured software testing.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="glass-card rounded-2xl p-5 flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <p class="text-sm font-medium text-slate-200 leading-snug pt-1">AWS Solutions Architect – Associate preparation.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                        <i data-lucide="cloud" class="w-5 h-5"></i>
+                    </div>
+                    <p class="text-sm font-medium text-slate-200 leading-snug pt-1">Cloud infrastructure and architecture.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                        <i data-lucide="terminal-square" class="w-5 h-5"></i>
+                    </div>
+                    <p class="text-sm font-medium text-slate-200 leading-snug pt-1">Linux and system administration.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                        <i data-lucide="box" class="w-5 h-5"></i>
+                    </div>
+                    <p class="text-sm font-medium text-slate-200 leading-snug pt-1">Docker and containerisation.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                        <i data-lucide="cpu" class="w-5 h-5"></i>
+                    </div>
+                    <p class="text-sm font-medium text-slate-200 leading-snug pt-1">Kubernetes and orchestration.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                    </div>
+                    <p class="text-sm font-medium text-slate-200 leading-snug pt-1">Software testing and quality assurance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. TECHNICAL STACK & CAPABILITIES -->
+    <section id="skills" class="py-20 sm:py-28 relative border-t border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <div class="font-mono text-xs text-cyan-400 uppercase tracking-widest mb-2">// Architecture &amp; Tooling</div>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Technical Skills Matrix</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
+                    Organized across programming, modern web stacks, databases, enterprise infrastructure, networking, cloud/DevOps, IoT and developer tooling.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                <!-- 1. Programming -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4">
+                            <i data-lucide="code-2" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-4">Programming</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-cyan-300 border border-slate-700/80">Python</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-cyan-300 border border-slate-700/80">JavaScript</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">C/C++ fundamentals</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">SQL</span>
+                    </div>
+                </div>
+
+                <!-- 2. Web development -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4">
+                            <i data-lucide="layout" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-4">Web development</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700/80">React</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700/80">Vite</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700/80">TypeScript</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">HTML</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">CSS</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">Tailwind</span>
+                    </div>
+                </div>
+
+                <!-- 3. Backend & databases -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4">
+                            <i data-lucide="database" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-4">Backend &amp; databases</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-cyan-300 border border-slate-700/80">Supabase</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-cyan-300 border border-slate-700/80">PostgreSQL</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">MySQL</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">REST APIs</span>
+                    </div>
+                </div>
+
+                <!-- 4. IT infrastructure -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4">
+                            <i data-lucide="server" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-4">IT infrastructure</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700/80">Windows Server</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700/80">Active Directory</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">Group Policy</span>
+                    </div>
+                </div>
+
+                <!-- 5. Networking -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4">
+                            <i data-lucide="network" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-4">Networking</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-cyan-300 border border-slate-700/80">TCP/IP</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-cyan-300 border border-slate-700/80">DHCP</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">routers</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">switches</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">troubleshooting</span>
+                    </div>
+                </div>
+
+                <!-- 6. Cloud & DevOps -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4">
+                            <i data-lucide="cloud" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-4">Cloud &amp; DevOps</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700/80">Cloud computing fundamentals</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700/80">AWS learning</span>
+                    </div>
+                </div>
+
+                <!-- 7. IoT & embedded systems -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4">
+                            <i data-lucide="cpu" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-4">IoT &amp; embedded systems</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-cyan-300 border border-slate-700/80">ESP32</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-cyan-300 border border-slate-700/80">Blynk</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">sensors</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">automation</span>
+                    </div>
+                </div>
+
+                <!-- 8. Tools -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4">
+                            <i data-lucide="wrench" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-4">Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700/80">Git</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700/80">GitHub</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">Docker</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">WSL2</span>
+                        <span class="font-mono text-xs px-2.5 py-1.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-700/80">AnyDesk</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. INTERACTIVE CONTACT SECTION -->
+    <section id="contact" class="py-20 sm:py-28 relative border-t border-slate-800/60 bg-slate-950/60">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Left Column: Direct Details & Copyable Handles -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <div class="font-mono text-xs text-emerald-400 uppercase tracking-widest mb-2">// Let's Build Together</div>
+                        <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Get in Touch</h2>
+                        <p class="text-slate-400 text-sm sm:text-base leading-relaxed mt-3">
+                            Whether you're looking for a full-stack software engineer, need custom systems integration for your operations or want to collaborate on fintech and cloud infrastructure—my inbox is open.
+                        </p>
+                    </div>
+
+                    <!-- Location Badge -->
+                    <div class="glass-card rounded-xl p-4 flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-semibold text-white">Harare, Zimbabwe</div>
+                            <div class="font-mono text-xs text-slate-400">Open to internships, graduate opportunities and junior technical roles</div>
+                        </div>
+                    </div>
+
+                    <!-- Clickable Copy-to-Clipboard Cards -->
+                    <div class="space-y-3">
+                        <div class="text-xs font-mono uppercase tracking-wider text-slate-500">Direct Channels (Click to Copy)</div>
+                        
+                        <!-- Email Copy Card -->
+                        <button type="button" onclick="copyToClipboard('tropafadzo02@gmail.com', 'Email address')" class="w-full glass-card rounded-xl p-4 flex items-center justify-between text-left group">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                                    <i data-lucide="mail" class="w-5 h-5"></i>
+                                </div>
+                                <div class="truncate">
+                                    <div class="text-xs text-slate-400">Email</div>
+                                    <div id="direct-email-display" class="font-mono text-sm text-slate-100 truncate">tropafadzo02@gmail.com</div>
+                                </div>
+                            </div>
+                            <span class="p-2 rounded-lg bg-slate-800/80 text-slate-400 group-hover:text-cyan-400 transition-colors shrink-0">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </span>
+                        </button>
+
+                        <!-- LinkedIn Copy Card -->
+                        <button type="button" onclick="copyToClipboard('https://linkedin.com/in/tadiwanashe-mafaniso', 'LinkedIn URL')" class="w-full glass-card rounded-xl p-4 flex items-center justify-between text-left group">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                                </div>
+                                <div class="truncate">
+                                    <div class="text-xs text-slate-400">LinkedIn</div>
+                                    <div class="font-mono text-sm text-slate-100 truncate">linkedin.com/in/tadiwanashe-mafaniso</div>
+                                </div>
+                            </div>
+                            <span class="p-2 rounded-lg bg-slate-800/80 text-slate-400 group-hover:text-cyan-400 transition-colors shrink-0">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </span>
+                        </button>
+
+                        <!-- GitHub Copy Card -->
+                        <button type="button" onclick="copyToClipboard('https://github.com/tropafadzo', 'GitHub URL')" class="w-full glass-card rounded-xl p-4 flex items-center justify-between text-left group">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                                    <i data-lucide="github" class="w-5 h-5"></i>
+                                </div>
+                                <div class="truncate">
+                                    <div class="text-xs text-slate-400">GitHub</div>
+                                    <div class="font-mono text-sm text-slate-100 truncate">github.com/tropafadzo</div>
+                                </div>
+                            </div>
+                            <span class="p-2 rounded-lg bg-slate-800/80 text-slate-400 group-hover:text-emerald-400 transition-colors shrink-0">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Contact Form -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" class="glass-card rounded-2xl p-6 sm:p-8 space-y-5">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                            <span class="font-display font-bold text-lg text-white">Send a Direct Message</span>
+                            <span class="font-mono text-xs text-emerald-400">Avg. response &lt; 24h</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="sender-name" class="block font-mono text-xs text-slate-300 mb-2">Your Name *</label>
+                                <input type="text" id="sender-name" name="name" required placeholder="e.g. Tendai Moyo" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors">
+                            </div>
+                            <div>
+                                <label for="sender-email" class="block font-mono text-xs text-slate-300 mb-2">Email Address *</label>
+                                <input type="email" id="sender-email" name="email" required placeholder="tendai@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="inquiry-type" class="block font-mono text-xs text-slate-300 mb-2">Inquiry Topic</label>
+                            <select id="inquiry-type" name="topic" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white focus:outline-none focus:border-cyan-400 transition-colors">
+                                <option value="Internships & Graduate Roles">Internships &amp; Graduate Technical Roles</option>
+                                <option value="Software Engineering & Cloud">Software Engineering &amp; Cloud Systems</option>
+                                <option value="IoT & Embedded Systems">IoT &amp; Embedded Systems</option>
+                                <option value="IT Support & Systems Administration">IT Support &amp; Systems Administration</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="sender-message" class="block font-mono text-xs text-slate-300 mb-2">Project Details or Message *</label>
+                            <textarea id="sender-message" name="message" rows="4" required placeholder="Tell me about the role, project, or collaboration opportunity..." class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors resize-none"></textarea>
+                        </div>
+
+                        <!-- Inline Form Status / Error / Fallback Banner -->
+                        <div id="form-status-banner" class="hidden rounded-xl p-3.5 text-xs font-mono border"></div>
+
+                        <button type="submit" id="contact-submit-btn" class="w-full py-3.5 px-6 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-emerald-500 text-obsidian hover:brightness-110 transition-all shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                            <span id="contact-submit-label">Transmit Message</span>
+                            <i data-lucide="send" id="contact-submit-icon" class="w-4 h-4"></i>
+                        </button>
+
+                        <!-- Direct Email Fallback Link -->
+                        <div class="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400">
+                            <span>Prefer your email client directly?</span>
+                            <a id="mailto-fallback-link" href="mailto:tadiwa.mafaniso@example.com?subject=Portfolio%20Inquiry%20for%20Tadiwanashe%20R.%20Mafaniso" class="inline-flex items-center gap-1.5 font-mono text-cyan-400 hover:text-emerald-400 transition-colors">
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                <span>Open Direct Email (mailto)</span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 py-8 bg-[#080B12]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2 text-sm text-slate-400">
+                <span class="font-display font-bold text-slate-200">Tadiwanashe R. Mafaniso</span>
+                <span>•</span>
+                <span class="font-mono text-xs">Harare, Zimbabwe</span>
+            </div>
+            <div class="font-mono text-xs text-slate-500">
+                Cloud Computing &amp; IoT / Software Development • &copy; <span id="current-year">2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Case Study Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6">
+        <!-- Backdrop -->
+        <div id="modal-backdrop" class="fixed inset-0 bg-obsidian/80 backdrop-blur-sm modal-backdrop"></div>
+        
+        <!-- Modal Panel -->
+        <div class="relative z-10 w-full max-w-2xl glass-card bg-[#0F1626] border border-slate-700/90 rounded-2xl shadow-2xl overflow-hidden modal-panel max-h-[90vh] flex flex-col">
+            <!-- Header -->
+            <div class="flex items-start justify-between p-6 border-b border-slate-800">
+                <div>
+                    <span id="modal-category" class="font-mono text-xs text-cyan-400 uppercase tracking-wider">Category</span>
+                    <h3 id="modal-title" class="font-display font-bold text-2xl text-white mt-1">Project Title</h3>
+                </div>
+                <button type="button" id="close-modal-btn" aria-label="Close modal" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Scrollable Case Study Content -->
+            <div class="p-6 overflow-y-auto space-y-6 text-sm">
+                <div>
+                    <h4 class="font-mono text-xs uppercase tracking-wider text-rose-400 mb-1.5 flex items-center gap-1.5">
+                        <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Context &amp; Problem
+                    </h4>
+                    <p id="modal-problem" class="text-slate-300 leading-relaxed"></p>
+                </div>
+
+                <div>
+                    <h4 class="font-mono text-xs uppercase tracking-wider text-cyan-400 mb-1.5 flex items-center gap-1.5">
+                        <i data-lucide="cpu" class="w-3.5 h-3.5"></i> Technical Approach &amp; Highlights
+                    </h4>
+                    <ul id="modal-highlights" class="space-y-2 text-slate-300 leading-relaxed"></ul>
+                </div>
+
+                <div>
+                    <h4 class="font-mono text-xs uppercase tracking-wider text-emerald-400 mb-1.5 flex items-center gap-1.5">
+                        <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Deliverables &amp; Outcomes
+                    </h4>
+                    <p id="modal-impact" class="text-slate-300 leading-relaxed"></p>
+                </div>
+
+                <div class="pt-2 border-t border-slate-800/80">
+                    <div class="font-mono text-xs text-slate-400 mb-2.5">Stack &amp; Components</div>
+                    <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="p-4 sm:px-6 bg-slate-900/80 border-t border-slate-800 flex items-center justify-between">
+                <span class="font-mono text-xs text-slate-400">Case Study Overview</span>
+                <a href="#contact" onclick="closeProjectModal()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/25 transition-colors">
+                    <span>Discuss Similar Architecture</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // ==========================================
+        // DEPLOYMENT CONFIGURATION CONSTANTS
+        // ==========================================
+        // 1. Set PORTRAIT_IMAGE_URL to a path in your deployed repo (e.g. './tadiwa-portrait.jpg')
+        //    or leave empty ('') to show the clean monogram/portrait card.
+        const PORTRAIT_IMAGE_URL = 'WhatsApp Image 2026-11-24 at 6.27.03 PM.jpeg';
+
+        // 2. Keep false for production so visitors do not see a public upload bar.
+        //    Set to true while testing local photo previews in your own browser.
+        const ALLOW_LOCAL_PHOTO_PREVIEW = false;
+
+        // 3. Configure your EmailJS credentials (https://www.emailjs.com)
+        //    so contact form submissions are delivered directly to your inbox.
+        const EMAILJS_PUBLIC_KEY = '-nQbwBpy9-LBQUJi5';
+        const EMAILJS_SERVICE_ID = 'service_3t1yu5y';
+        const EMAILJS_TEMPLATE_ID = 'template_b5yqu35';
+
+        // 4. Update CONTACT_EMAIL to your real email address for copy & mailto fallback.
+        const CONTACT_EMAIL = 'tropafadzo02@gmail.com';
+
+        const directEmailDisplay = document.getElementById('direct-email-display');
+        const mailtoFallbackLink = document.getElementById('mailto-fallback-link');
+        const currentYearEl = document.getElementById('current-year');
+
+        // Initialize EmailJS if a public key is configured
+        if (window.emailjs && EMAILJS_PUBLIC_KEY && !EMAILJS_PUBLIC_KEY.includes('YOUR_EMAILJS_PUBLIC_KEY')) {
+            emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+        }
+
+        // Initialize Lucide Icons & Footer Year
+        if (directEmailDisplay) directEmailDisplay.textContent = CONTACT_EMAIL;
+        if (mailtoFallbackLink) {
+            mailtoFallbackLink.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Portfolio Inquiry for Tadiwanashe R. Mafaniso')}`;
+        }
+        if (currentYearEl) {
+            currentYearEl.textContent = String(new Date().getFullYear());
+        }
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
+        }
+
+        // ==========================================
+        // 1. PROJECTS DATASET & CASE STUDY MODAL
+        // ==========================================
+        const PROJECTS_DATA = [
+            {
+                id: 'beeku',
+                title: 'Beeku – Digital Services Marketplace',
+                category: 'web',
+                categoryLabel: 'Web & Marketplaces',
+                status: 'In Development',
+                summary: 'A platform connecting customers with skilled service providers.',
+                problem: 'Customers and skilled local service providers often rely on fragmented referrals and informal messaging, making discovery, trust, and workflow coordination inconsistent.',
+                highlights: [
+                    'Built with React, Vite and Tailwind CSS for a responsive multi-role web experience.',
+                    'Integrated Supabase backend and authentication to manage accounts and data.',
+                    'Structured distinct client, helper and administrator workflows.',
+                    'Designed core marketplace functionality for service discovery and bookings.'
+                ],
+                impact: 'Establishes a structured digital marketplace foundation supporting multi-role workflows and scalable cloud-backed data persistence.',
+                tags: ['React', 'Vite', 'Tailwind CSS', 'Supabase', 'Authentication', 'Marketplace']
+            },
+            {
+                id: 'hydroponic-iot',
+                title: 'Smart Hydroponic Irrigation System',
+                category: 'iot',
+                categoryLabel: 'IoT & Embedded',
+                status: 'Practical IoT Project',
+                summary: 'An automated hydroponic monitoring and irrigation system.',
+                problem: 'Manual hydroponic nutrient and water management requires constant checking and can lead to uneven growth conditions or delayed pump responses.',
+                highlights: [
+                    'Powered by an ESP32 microcontroller connected to the Blynk IoT platform.',
+                    'Monitors pH, TDS, temperature, humidity, and water-level conditions.',
+                    'Implements automatic pump control based on sensor telemetry and thresholds.'
+                ],
+                impact: 'Provides remote real-time visibility and automated irrigation control to support consistent hydroponic crop care.',
+                tags: ['ESP32', 'Blynk IoT', 'pH & TDS Sensors', 'Temperature & Humidity', 'Water-Level', 'Auto Pump']
+            },
+            {
+                id: 'licence-verification',
+                title: 'Digital Licence Verification System',
+                category: 'web',
+                categoryLabel: 'Web & Marketplaces',
+                status: 'In Development',
+                summary: 'A web-based platform for verifying defensive licence authenticity.',
+                problem: 'Manual licence checks can be slow and error-prone when verifying records across organisations and issuing authorities.',
+                highlights: [
+                    'Developed with React and TypeScript backed by Supabase database and authentication.',
+                    'Implemented role-based dashboards tailored to operational permissions.',
+                    'Added organisation management alongside OCR-based licence information extraction.'
+                ],
+                impact: 'Streamlines licence data capture via OCR and supports structured verification workflows across organisations.',
+                tags: ['React', 'TypeScript', 'Supabase', 'RBAC Dashboards', 'Org Management', 'OCR']
+            },
+            {
+                id: 'knowbase-ai',
+                title: 'KnowBase AI – IT Support Knowledge Base',
+                category: 'ai',
+                categoryLabel: 'AI & Support',
+                status: 'Learning Project',
+                summary: 'An AI-assisted knowledge retrieval concept for IT support documentation.',
+                problem: 'IT support teams and engineers spend valuable time searching scattered runbooks, tickets, and technical notes during incident resolution.',
+                highlights: [
+                    'Explores AI-assisted knowledge retrieval over structured IT support documentation.',
+                    'Focuses on organizing technical documentation for faster lookup.',
+                    'Models AI-assisted support workflows to aid troubleshooting efficiency.'
+                ],
+                impact: 'Demonstrates practical exploration of knowledge retrieval patterns to speed up IT documentation discovery.',
+                tags: ['Knowledge Retrieval', 'Technical Docs', 'AI Workflows', 'IT Support']
+            },
+            {
+                id: 'hadoop-lab',
+                title: 'Hadoop Distributed Computing Lab',
+                category: 'cloud',
+                categoryLabel: 'Cloud & Distributed Systems',
+                status: 'Academic Project',
+                summary: 'A locally configured Hadoop cluster for exploring distributed storage and computing.',
+                problem: 'Understanding distributed file storage and multi-node cluster behavior requires hands-on configuration beyond single-machine scripts.',
+                highlights: [
+                    'Configured Hadoop 3.4.3 using Docker and WSL2 on a local development environment.',
+                    'Provisioned a multi-node topology with one NameNode and three DataNodes.',
+                    'Explored distributed storage blocks and cluster node coordination.'
+                ],
+                impact: 'Delivers a repeatable local lab environment for practicing distributed storage and cluster operations.',
+                tags: ['Hadoop 3.4.3', 'Docker', 'WSL2', '1 NameNode', '3 DataNodes']
+            }
+        ];
+
+        const projectsGrid = document.getElementById('projects-grid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectModal = document.getElementById('project-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        function renderProjects(filter = 'all') {
+            if (!projectsGrid) return;
+            const filtered = filter === 'all'
+                ? PROJECTS_DATA
+                : PROJECTS_DATA.filter((p) => p.category === filter);
+
+            projectsGrid.innerHTML = filtered.map((project) => `
+                <article tabindex="0" role="button" aria-label="Open case study for ${project.title}" onclick="openProjectModal('${project.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectModal('${project.id}');}" class="glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer group">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="font-mono text-[11px] px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">${project.status}</span>
+                            <span class="font-mono text-[11px] text-slate-400">${project.categoryLabel}</span>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white group-hover:text-cyan-300 transition-colors mb-2">${project.title}</h3>
+                        <p class="text-sm text-slate-300 mb-4">${project.summary}</p>
+                        <ul class="space-y-1.5 text-xs text-slate-400 mb-5">
+                            ${project.highlights.slice(0, 3).map((item) => `
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-400 font-mono mt-0.5">-</span>
+                                    <span>${item}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                        <div class="flex flex-wrap gap-1.5">
+                            ${project.tags.slice(0, 3).map((tag) => `
+                                <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">${tag}</span>
+                            `).join('')}
+                        </div>
+                        <span class="inline-flex items-center gap-1 font-mono text-xs text-cyan-400 group-hover:translate-x-0.5 transition-transform shrink-0">
+                            <span>Details</span>
+                            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </article>
+            `).join('');
+
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+                window.lucide.createIcons();
+            }
+        }
+
+        function openProjectModal(projectId) {
+            const project = PROJECTS_DATA.find((p) => p.id === projectId);
+            if (!project || !projectModal) return;
+
+            document.getElementById('modal-category').textContent = `${project.categoryLabel} • ${project.status}`;
+            document.getElementById('modal-title').textContent = project.title;
+            document.getElementById('modal-problem').textContent = project.problem;
+            document.getElementById('modal-highlights').innerHTML = project.highlights.map((h) => `
+                <li class="flex items-start gap-2">
+                    <span class="text-cyan-400 font-mono">-</span>
+                    <span>${h}</span>
+                </li>
+            `).join('');
+            document.getElementById('modal-impact').textContent = project.impact;
+            document.getElementById('modal-tags').innerHTML = project.tags.map((t) => `
+                <span class="font-mono text-xs px-2.5 py-1 rounded-lg bg-slate-900 text-cyan-300 border border-slate-700/80">${t}</span>
+            `).join('');
+
+            projectModal.classList.remove('hidden');
+            projectModal.classList.add('flex');
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+                window.lucide.createIcons();
+            }
+        }
+
+        function closeProjectModal() {
+            if (!projectModal) return;
+            projectModal.classList.add('hidden');
+            projectModal.classList.remove('flex');
+        }
+
+        filterButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const selectedFilter = btn.getAttribute('data-filter') || 'all';
+                filterButtons.forEach((b) => {
+                    b.classList.remove('bg-cyan-500/15', 'text-cyan-300', 'border-cyan-500/40');
+                    b.classList.add('bg-slate-900/70', 'text-slate-400', 'border-slate-800');
+                });
+                btn.classList.remove('bg-slate-900/70', 'text-slate-400', 'border-slate-800');
+                btn.classList.add('bg-cyan-500/15', 'text-cyan-300', 'border-cyan-500/40');
+                renderProjects(selectedFilter);
+            });
+        });
+
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeProjectModal);
+        if (modalBackdrop) modalBackdrop.addEventListener('click', closeProjectModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeProjectModal();
+        });
+
+        renderProjects('all');
+
+        // Mobile navigation toggle
+        (function initMobileNav() {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            if (!menuBtn || !mobileMenu) return;
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        })();
+
+        // ==========================================
+        // 5. TOAST NOTIFICATIONS, CLIPBOARD & EMAILJS CONTACT
+        // ==========================================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const borderColor = type === 'success' ? 'border-emerald-500/50' : 'border-cyan-500/50';
+            const iconColor = type === 'success' ? 'text-emerald-400' : 'text-cyan-400';
+            const iconName = type === 'success' ? 'check-circle-2' : 'info';
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/95 border ${borderColor} text-slate-100 text-xs font-mono shadow-2xl backdrop-blur-md transform transition-all duration-300 translate-y-2 opacity-0`;
+            toast.innerHTML = `
+                <i data-lucide="${iconName}" class="w-4 h-4 ${iconColor} shrink-0"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3800);
+        }
+
+        function copyToClipboard(text, label) {
+            const valueToCopy = label === 'Email address' ? CONTACT_EMAIL : text;
+            const tempInput = document.createElement('input');
+            tempInput.value = valueToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast(`${label} copied to clipboard!`, 'success');
+            } catch (err) {
+                showToast(`Could not copy ${label}.`, 'info');
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        function triggerResumeDownload() {
+            const contactSection = document.getElementById('contact');
+            const topicSelect = document.getElementById('inquiry-type');
+            const messageBox = document.getElementById('sender-message');
+            
+            topicSelect.value = 'Internships & Graduate Roles';
+            messageBox.value = 'Hi Tadiwanashe, I would like to request a copy of your latest CV / profile regarding an opportunity.';
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+            showToast('Pre-filled CV request below — submit or email directly!', 'info');
+        }
+
+        function setFormBanner(message, variant = 'info') {
+            const banner = document.getElementById('form-status-banner');
+            if (!banner) return;
+            banner.classList.remove('hidden', 'bg-emerald-500/10', 'text-emerald-300', 'border-emerald-500/30', 'bg-rose-500/10', 'text-rose-300', 'border-rose-500/30', 'bg-cyan-500/10', 'text-cyan-300', 'border-cyan-500/30');
+            if (variant === 'success') {
+                banner.classList.add('bg-emerald-500/10', 'text-emerald-300', 'border-emerald-500/30');
+            } else if (variant === 'error') {
+                banner.classList.add('bg-rose-500/10', 'text-rose-300', 'border-rose-500/30');
+            } else {
+                banner.classList.add('bg-cyan-500/10', 'text-cyan-300', 'border-cyan-500/30');
+            }
+            banner.innerHTML = message;
+        }
+
+        // EmailJS Contact Form Submission Handler
+        (function initContactForm() {
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('contact-submit-btn');
+            const submitLabel = document.getElementById('contact-submit-label');
+            if (!form || !submitBtn || !submitLabel) return;
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const senderName = document.getElementById('sender-name').value.trim();
+                const senderEmail = document.getElementById('sender-email').value.trim();
+                const inquiryTopic = document.getElementById('inquiry-type').value;
+                const senderMessage = document.getElementById('sender-message').value.trim();
+
+                const isEmailJsConfigured =
+                    window.emailjs &&
+                    EMAILJS_PUBLIC_KEY && !EMAILJS_PUBLIC_KEY.includes('YOUR_EMAILJS_PUBLIC_KEY') &&
+                    EMAILJS_SERVICE_ID && !EMAILJS_SERVICE_ID.includes('YOUR_EMAILJS_SERVICE_ID') &&
+                    EMAILJS_TEMPLATE_ID && !EMAILJS_TEMPLATE_ID.includes('YOUR_EMAILJS_TEMPLATE_ID');
+
+                if (!isEmailJsConfigured) {
+                    const fallbackMailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`[Portfolio] ${inquiryTopic} from ${senderName}`)}&body=${encodeURIComponent(`Name: ${senderName}\nEmail: ${senderEmail}\nTopic: ${inquiryTopic}\n\n${senderMessage}`)}`;
+                    setFormBanner(
+                        `EmailJS is not configured yet. Set <code>EMAILJS_PUBLIC_KEY</code>, <code>EMAILJS_SERVICE_ID</code>, and <code>EMAILJS_TEMPLATE_ID</code> in the script to enable automatic inbox delivery, or <a href="${fallbackMailto}" class="underline font-semibold text-white">send via your email app</a>.`,
+                        'info'
+                    );
+                    showToast('Set your EmailJS keys in the script to receive emails.', 'info');
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitLabel.textContent = 'Sending Message...';
+
+                try {
+                    await emailjs.send(
+                        EMAILJS_SERVICE_ID,
+                        EMAILJS_TEMPLATE_ID,
+                        {
+                            from_name: senderName,
+                            reply_to: senderEmail,
+                            topic: inquiryTopic,
+                            message: senderMessage,
+                            to_email: CONTACT_EMAIL
+                        },
+                        { publicKey: EMAILJS_PUBLIC_KEY }
+                    );
+
+                    setFormBanner(
+                        `Message sent! Thank you, ${senderName} — your note has been delivered via EmailJS.`,
+                        'success'
+                    );
+                    showToast('Message delivered successfully!', 'success');
+                    form.reset();
+                } catch (emailErr) {
+                    const errText = (emailErr && (emailErr.text || emailErr.message)) || 'Unable to send message through EmailJS.';
+                    setFormBanner(
+                        `${errText} You can also <a href="mailto:${CONTACT_EMAIL}" class="underline font-semibold">email directly</a>.`,
+                        'error'
+                    );
+                    showToast('EmailJS delivery returned an error.', 'info');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitLabel.textContent = 'Transmit Message';
+                }
+            });
+        })();
+
+        // ==========================================
+        // 5B. DEPLOYMENT-SAFE PORTRAIT FRAME
+        // ==========================================
+        (function initPortraitFrame() {
+            const STORAGE_KEY = 'tadiwa_portfolio_local_preview_v1';
+            const dropzone = document.getElementById('portrait-dropzone');
+            const fileInput = document.getElementById('portrait-file-input');
+            const uploadBtn = document.getElementById('upload-photo-btn');
+            const uploadBtnLabel = document.getElementById('upload-photo-btn-label');
+            const resetBtn = document.getElementById('reset-photo-btn');
+            const placeholder = document.getElementById('portrait-placeholder');
+            const previewImg = document.getElementById('portrait-preview');
+            const hoverOverlay = document.getElementById('portrait-hover-overlay');
+            const controlsRow = uploadBtn ? uploadBtn.parentElement : null;
+
+            function showImage(src) {
+                if (!previewImg) return;
+
+                if (!src) {
+                    previewImg.src = '';
+                    previewImg.classList.add('hidden');
+                    if (placeholder) placeholder.classList.remove('hidden');
+                    return;
+                }
+                previewImg.onerror = function() {
+                    previewImg.src = '';
+                    previewImg.classList.add('hidden');
+                    if (placeholder) placeholder.classList.remove('hidden');
+                };
+                previewImg.src = src;
+                previewImg.classList.remove('hidden');
+                if (placeholder) placeholder.classList.add('hidden');
+            }
+
+            // Configure production vs local preview mode
+            if (!ALLOW_LOCAL_PHOTO_PREVIEW) {
+                try {
+                    localStorage.removeItem(STORAGE_KEY);
+                } catch (e) {}
+
+                if (controlsRow) controlsRow.classList.add('hidden');
+                if (hoverOverlay) {
+                    hoverOverlay.classList.add('hidden');
+                    hoverOverlay.classList.remove('flex');
+                }
+                if (dropzone) {
+                    dropzone.classList.remove('cursor-pointer');
+                    dropzone.removeAttribute('role');
+                    dropzone.removeAttribute('tabindex');
+                }
+
+                const promptLines = placeholder ? placeholder.querySelectorAll('p') : [];
+                if (promptLines[1]) promptLines[1].textContent = 'Cloud Computing & IoT • Software Development';
+                if (promptLines[2]) {
+                    promptLines[2].textContent = PORTRAIT_IMAGE_URL
+                        ? 'Deployed portrait asset'
+                        : 'Set PORTRAIT_IMAGE_URL in script for live photo';
+                }
+
+                if (PORTRAIT_IMAGE_URL && PORTRAIT_IMAGE_URL.trim() !== '') {
+                    showImage(PORTRAIT_IMAGE_URL.trim());
+                } else {
+                    showImage('');
+                }
+                return;
+            }
+
+            // Local Browser Preview Only mode (when ALLOW_LOCAL_PHOTO_PREVIEW === true)
+            if (controlsRow) controlsRow.classList.remove('hidden');
+            if (dropzone) {
+                dropzone.classList.add('cursor-pointer');
+                dropzone.setAttribute('role', 'button');
+                dropzone.setAttribute('tabindex', '0');
+            }
+
+            const localHint = placeholder ? placeholder.querySelectorAll('p')[2] : null;
+            if (localHint) {
+                localHint.textContent = 'Local Browser Preview Only — saved only in your current browser';
+            }
+
+            function applyLocalPreview(dataUrl, fromSaved = false) {
+                if (dataUrl) {
+                    showImage(dataUrl);
+                    if (hoverOverlay) {
+                        hoverOverlay.classList.remove('hidden');
+                        hoverOverlay.classList.add('flex');
+                    }
+                    if (resetBtn) resetBtn.classList.remove('hidden');
+                    if (uploadBtnLabel) uploadBtnLabel.textContent = 'Change Photo (Local Preview)';
+                    if (!fromSaved) {
+                        showToast('Local Browser Preview Only: visible only in this browser.', 'info');
+                    }
+                } else if (PORTRAIT_IMAGE_URL && PORTRAIT_IMAGE_URL.trim() !== '') {
+                    showImage(PORTRAIT_IMAGE_URL.trim());
+                    if (hoverOverlay) {
+                        hoverOverlay.classList.add('hidden');
+                        hoverOverlay.classList.remove('flex');
+                    }
+                    if (resetBtn) resetBtn.classList.add('hidden');
+                    if (uploadBtnLabel) uploadBtnLabel.textContent = 'Upload Photo (Local Preview Only)';
+                } else {
+                    showImage('');
+                    if (hoverOverlay) {
+                        hoverOverlay.classList.add('hidden');
+                        hoverOverlay.classList.remove('flex');
+                    }
+                    if (resetBtn) resetBtn.classList.add('hidden');
+                    if (uploadBtnLabel) uploadBtnLabel.textContent = 'Upload Photo (Local Preview Only)';
+                }
+            }
+
+            try {
+                const savedLocalPhoto = localStorage.getItem(STORAGE_KEY);
+                if (savedLocalPhoto) {
+                    applyLocalPreview(savedLocalPhoto, true);
+                } else if (PORTRAIT_IMAGE_URL && PORTRAIT_IMAGE_URL.trim() !== '') {
+                    showImage(PORTRAIT_IMAGE_URL.trim());
+                }
+            } catch (e) {}
+
+            function processImageFile(file) {
+                if (!file) return;
+                if (!file.type || !file.type.startsWith('image/')) {
+                    showToast('Please select a valid image file (JPG, PNG, or WEBP).', 'info');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const maxDim = 900;
+                        let targetW = img.width;
+                        let targetH = img.height;
+                        if (targetW > maxDim || targetH > maxDim) {
+                            if (targetW > targetH) {
+                                targetH = Math.round((targetH * maxDim) / targetW);
+                                targetW = maxDim;
+                            } else {
+                                targetW = Math.round((targetW * maxDim) / targetH);
+                                targetH = maxDim;
+                            }
+                        }
+
+                        const offscreen = document.createElement('canvas');
+                        offscreen.width = targetW;
+                        offscreen.height = targetH;
+                        const ctx = offscreen.getContext('2d');
+                        if (!ctx) return;
+                        ctx.drawImage(img, 0, 0, targetW, targetH);
+
+                        const optimizedDataUrl = offscreen.toDataURL('image/jpeg', 0.88);
+                        applyLocalPreview(optimizedDataUrl, false);
+
+                        try {
+                            localStorage.setItem(STORAGE_KEY, optimizedDataUrl);
+                        } catch (storageErr) {}
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            if (dropzone && fileInput) {
+                dropzone.addEventListener('click', () => fileInput.click());
+                dropzone.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        fileInput.click();
+                    }
+                });
+            }
+            if (uploadBtn && fileInput) {
+                uploadBtn.addEventListener('click', () => fileInput.click());
+            }
+
+            if (fileInput) {
+                fileInput.addEventListener('change', (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                        processImageFile(e.target.files[0]);
+                    }
+                });
+            }
+
+            if (dropzone) {
+                ['dragenter', 'dragover'].forEach(evtName => {
+                    dropzone.addEventListener(evtName, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        dropzone.classList.add('border-cyan-400', 'scale-[1.01]');
+                    });
+                });
+
+                ['dragleave', 'drop'].forEach(evtName => {
+                    dropzone.addEventListener(evtName, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        dropzone.classList.remove('border-cyan-400', 'scale-[1.01]');
+                    });
+                });
+
+                dropzone.addEventListener('drop', (e) => {
+                    const files = e.dataTransfer?.files;
+                    if (files && files[0]) {
+                        processImageFile(files[0]);
+                    }
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    try {
+                        localStorage.removeItem(STORAGE_KEY);
+                    } catch (e) {}
+                    if (fileInput) fileInput.value = '';
+                    applyLocalPreview(null, true);
+                    showToast('Local browser preview cleared.', 'info');
+                });
+            }
+        })();
+
+        // ==========================================
+        // 6. INTERACTIVE HERO NODE NETWORK CANVAS
+        // ==========================================
+        (function initHeroCanvas() {
+            const canvas = document.getElementById('hero-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [];
+            const mouse = { x: null, y: null, radius: 140 };
+
+            function resizeCanvas() {
+                width = canvas.width = canvas.parentElement.offsetWidth;
+                height = canvas.height = canvas.parentElement.offsetHeight;
+                createParticles();
+            }
+
+            function createParticles() {
+                particles = [];
+                const count = Math.min(Math.floor((width * height) / 16000), 75);
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.45,
+                        vy: (Math.random() - 0.5) * 0.45,
+                        radius: Math.random() * 1.8 + 1,
+                        color: Math.random() > 0.5 ? '#06B6D4' : '#10B981'
+                    });
+                }
+            }
+
+            window.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            window.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 130) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(6, 182, 212, ${0.18 * (1 - dist / 130)})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = p.x - mouse.x;
+                        const dy = p.y - mouse.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < mouse.radius) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(16, 185, 129, ${0.35 * (1 - dist / mouse.radius)})`;
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('load', () => {
+                resizeCanvas();
+                animate();
+            });
+        })();
+    </script>
+</body>
+</html>
